@@ -18,9 +18,9 @@
 
 enum vel
 {
-  SLOW = 10,
-  MED = 20,
-  FAST = 100
+  SLOW = 30,
+  MED = 40,
+  FAST = 50
 };
 
 class Ball
@@ -57,6 +57,8 @@ class Ball
             void set_x_pos(int);
             void set_y_pos(int);
             void set_radius(int);
+            void setVel(vel);
+            void reset_ball_pos();
             void updatePosition();
 };
 

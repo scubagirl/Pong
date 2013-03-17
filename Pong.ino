@@ -16,7 +16,7 @@
   // When the text on the LED circuit board is upside down, it is oriented properly
 
 int radius = 4;
-vel velocity = MED; //set velocity: SLOW, MED, FAST
+vel velocity = FAST; //set velocity: SLOW, MED, FAST
 unsigned long ms_current=0; //millisecond variable for loop timing
 unsigned long ms_previous=0; //millisecond variable for loop timing
 int length = 40;      //length of paddle
@@ -26,7 +26,7 @@ Paddle right_paddle(XMAX-width, XMAX, length, 1, PADDLECOLOR);
 Paddle paddle_array[2] = {left_paddle, right_paddle};
 LCDShield lcd;
 Ball ball(radius, velocity);  //Create ball object
-
+int buttons[3] = {3, 4, 5};  // S1 = 3, S2 = 4, S3 = 5
 void setup()
 {
   
@@ -37,12 +37,40 @@ lcd.clear(BACKGROUND);
 
 }
 
+
+void reset_ball_LCD(){
+      lcd.setSolidCircle(ball.get_x_pos(), ball.get_y_pos(), ball.get_radius(), BACKGROUND);
+      ball.reset_ball_pos();
+      lcd.setSolidCircle(ball.get_x_pos(), ball.get_y_pos(), ball.get_radius(), BALLCOLOR);
+}
+
 void loop()
 {
 
     paddle_array[0].update_paddle_position(analogRead(0));
     
+    Serial.begin(9600);
+    for(int i=0; i < 3; i++){
+      pinMode(buttons[i], INPUT);
+      digitalWrite(buttons[i], HIGH);
+    }
     
+   //while(digitalRead(buttons[0])&&digitalRead(buttons[1])&&digitalRead(buttons[2]))
+    //;  // Wait, do nothing, until a button is pressed
+    if(!digitalRead(buttons[0])){
+      ball.setVel(SLOW);
+      reset_ball_LCD();
+    }
+ 
+   if(!digitalRead(buttons[1])){
+     ball.setVel(MED);
+     reset_ball_LCD();
+   }
+
+  if(!digitalRead(buttons[2])){
+     ball.setVel(FAST);
+     reset_ball_LCD();
+  }  
     
     if(paddle_array[0].get_Yoffset() > paddle_array[0].get_Yoffset_prev())  //if paddle moves up
     {
@@ -97,12 +125,7 @@ void loop()
     
     else
     {
-        ball.set_x_pos(64);
-        ball.set_y_pos(65);
-        lcd.setSolidCircle(ball.get_x_pos(), ball.get_y_pos(), ball.get_radius(), BALLCOLOR); // draw updated ball
-        ball.collision_int=0;
-        
-        
+        reset_ball_LCD();
      }
      
      ms_previous=ms_current;  

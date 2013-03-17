@@ -76,7 +76,11 @@ Ball::collisiontype Ball::collision(int x_min_ball, int x_max_ball, int y_min_ba
     return NOCOLLISION;
   } 
 }
-
+void Ball::setVel(vel thing)
+{
+  x_vel = thing;
+  y_vel = thing;
+}
 void Ball::updatePosition()
 {
   switch(collision(x_pos - radius, x_pos + radius, y_pos - radius, y_pos + radius))
@@ -128,6 +132,13 @@ int Ball::get_loop_rate()
   return 1000/loopfreq;
 }
 
+void Ball::reset_ball_pos()
+{
+  set_x_pos(64);
+  set_y_pos(65);
+}
+  
+
 void Ball::set_x_pos(int x)
 {
   x_pos = x;
@@ -142,6 +153,7 @@ void Ball::set_radius(int r)
 {
   radius = r;
 }
+
 
 /////////////////////////////////////////
 
