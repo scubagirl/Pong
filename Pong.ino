@@ -1,14 +1,5 @@
 /*
-  ZanyCircles - An example sketch for the Color LCD Shield Library
-  by: Jim Lindblom
-  SparkFun Electronics
-  date: 6/23/11
-  license: CC-BY SA 3.0 - Creative commons share-alike 3.0
-  use this code however you'd like, just keep this license and
-  attribute. Let me know if you make hugely, awesome, great changes.
-  
-  This simple sketch shows how you can use setCircle and setPixel
-  with the Color LCD Shield library. 
+Micro-Pong
 */
 #include <ColorLCDShield.h>
 #include "pong_support.h"
