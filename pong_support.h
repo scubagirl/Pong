@@ -13,8 +13,8 @@
 #define YMIN 2
 #define YMAX 131
 #define BACKGROUND BLACK
-#define BALLCOLOR WHITE
-#define PADDLECOLOR WHITE
+#define BALLCOLOR ORANGE
+#define PADDLECOLOR GREEN
 
 enum vel
 {
